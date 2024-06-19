@@ -4,9 +4,9 @@ using UnityEngine;
 public class RoomsPlacer : MonoBehaviour
 {
     [Header("Комнаты для генерации")]
-    [SerializeField] private Room _startingRoom;
+    [SerializeField] private Room _startRoom;
 
-    [SerializeField] private Room _bossRoom;
+    [SerializeField] private Room _finalRoom;
     [SerializeField] private Room[] _roomPrefabs;
 
     [Header("Настройки генерации")]
@@ -109,7 +109,7 @@ public class RoomsPlacer : MonoBehaviour
         _roomGrid[x, y] = 1;
         _roomCount++;
 
-        Room newRoomPrefab = isBossRoom ? _bossRoom : _roomPrefabs[Random.Range(0, _roomPrefabs.Length)];
+        Room newRoomPrefab = isBossRoom ? _finalRoom : _roomPrefabs[Random.Range(0, _roomPrefabs.Length)];
         var newRoom = Instantiate(newRoomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = isBossRoom ? "BossRoom" : $"Room-{_roomCount}";
@@ -152,7 +152,7 @@ public class RoomsPlacer : MonoBehaviour
         int y = roomIndex.y;
         _roomGrid[x, y] = 1;
         _roomCount++;
-        var initialRoom = Instantiate(_startingRoom, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
+        var initialRoom = Instantiate(_startRoom, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"Room-{_roomCount}";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         _roomObjects.Add(initialRoom);
