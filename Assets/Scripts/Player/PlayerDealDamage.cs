@@ -17,6 +17,7 @@ public class PlayerDealDamage : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
     }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

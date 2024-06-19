@@ -21,6 +21,11 @@ public class PlayerStats : MonoBehaviour
     public int numberOfFlashes;
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private AudioClip _potionSoundClip;
+    [SerializeField] private AudioClip _damageSoundClip;
+
+    private AudioSource _audioSource;
+
     private void Awake()
     {
         if (playerStats != null)
@@ -37,12 +42,15 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         health = maxHealth;
         SetHealth();
     }
 
     public void DealDamage(float damage)
     {
+        _audioSource.clip = _damageSoundClip;
+        _audioSource.Play();
         health -= damage;
         CheckDeath();
         SetHealth();
@@ -80,6 +88,8 @@ public class PlayerStats : MonoBehaviour
 
     public void AddHealth(float value)
     {
+        _audioSource.clip = _potionSoundClip;
+        _audioSource.Play();
         health += value;
         CheckOverheal();
         SetHealth();

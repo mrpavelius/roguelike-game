@@ -8,6 +8,10 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (collision.name != "Player" && !collision.CompareTag("Room"))
         {
+            if (collision.GetComponent<EnemyReceiveDamage>() != null)
+            {
+                collision.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
+            }
             Destroy(gameObject);
         }
     }
