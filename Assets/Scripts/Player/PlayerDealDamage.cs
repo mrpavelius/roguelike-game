@@ -9,10 +9,20 @@ public class PlayerDealDamage : MonoBehaviour
     public float maxDamage;
     public float projectileForce;
 
+    [SerializeField] private AudioClip _projectileSoundClip;
+
+    private AudioSource _audioSource;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            _audioSource.clip = _projectileSoundClip;
+            _audioSource.Play();
             GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 myPos = transform.position;

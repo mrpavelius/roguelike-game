@@ -12,12 +12,12 @@ public class PlayerStats : MonoBehaviour
     public Text amountOfHealth;
     public Slider healthBar;
 
-
     public float health;
     public float maxHealth;
 
     [Header("iFrames")]
     public float IFramesDuration;
+
     public int numberOfFlashes;
     private SpriteRenderer spriteRenderer;
 
@@ -31,7 +31,7 @@ public class PlayerStats : MonoBehaviour
         {
             playerStats = this;
         }
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

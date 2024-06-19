@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        Game.Load();
+        Level1.Load();
     }
 
     public void ViewRecords()
