@@ -10,7 +10,6 @@ public class PlayerRoomTracker : MonoBehaviour
         if (room != null)
         {
             _currentRoom = room;
-            Debug.Log(_currentRoom.transform.position.x);
             CameraController.Instance.UpdateCameraPosition(_currentRoom);
         }
     }
