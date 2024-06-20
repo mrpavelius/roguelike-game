@@ -9,4 +9,9 @@ public class PlayerRecords : MonoBehaviour
     {
         _worldsPassed.text = PlayerPrefs.GetInt("Records").ToString();
     }
+
+    public void BackToMainMenu()
+    {
+        IJunior.TypedScenes.MainMenu.Load();
+    }
 }
