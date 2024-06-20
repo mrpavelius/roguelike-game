@@ -6,16 +6,11 @@ public class PlayerRoomTracker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Room room = collision.GetComponent<Room>();
+        Room room = collision.GetComponentInParent<Room>();
         if (room != null)
         {
             _currentRoom = room;
             CameraController.Instance.UpdateCameraPosition(_currentRoom);
         }
-    }
-
-    public Room GetCurrentRoom()
-    {
-        return _currentRoom;
     }
 }
