@@ -8,7 +8,7 @@ public class EnemyDealDamage : MonoBehaviour
     public GameObject player;
     public float minDamage;
     public float maxDamage;
-    public float projectileForce;  
+    public float projectileForce;
     public float cooldown;
     private Animator animator;
 
