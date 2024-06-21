@@ -28,7 +28,8 @@ public class Room : MonoBehaviour
         {
             for (int i = 0; i < Random.Range(_minSpawn, _maxSpawn); i++)
             {
-                var spawnedEnemy = Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-4, 4), transform.position.y + Random.Range(-4, 4)), Quaternion.identity);
+                var spawnedEnemy = Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y + Random.Range(-3, 3)), Quaternion.identity);
+                spawnedEnemy.transform.parent = transform;
                 spawnedEnemies.Add(spawnedEnemy);
             }
         }

@@ -35,7 +35,7 @@ public class EnemyDealDamage : MonoBehaviour
     private void Start()
     {
         StartCoroutine(shootPlayer());
-        player = FindObjectOfType<PlayerMovement>().gameObject;
+        player = FindObjectOfType<PlayerController>().gameObject;
     }
 
     private IEnumerator shootPlayer()
