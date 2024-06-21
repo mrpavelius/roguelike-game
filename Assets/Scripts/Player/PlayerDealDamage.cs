@@ -29,7 +29,7 @@ public class PlayerDealDamage : MonoBehaviour
             Vector2 myPos = transform.position;
             Vector2 direction = (mousePosition - myPos).normalized;
             spell.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
-            spell.GetComponent<PlayerProjectile>().damage = Random.Range(minDamage, maxDamage);       
+            spell.GetComponent<PlayerProjectile>().damage = Random.Range(minDamage, maxDamage);
         }
     }
 }

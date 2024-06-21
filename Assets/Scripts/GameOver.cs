@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -10,9 +9,12 @@ public class GameOver : MonoBehaviour
     {
         if (_player == null)
         {
-            int levels = PlayerPrefs.GetInt("Records");
-            PlayerPrefs.SetInt("Records", levels++);
-            Debug.Log("Игра окончена");
+            if (SceneManager.GetActiveScene().name == "Level1")
+            {
+                PlayerPrefs.SetInt("Records", 0);
+            }
+
+            IJunior.TypedScenes.MainMenu.Load();
         }
     }
 }

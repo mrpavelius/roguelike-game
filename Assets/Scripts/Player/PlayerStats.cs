@@ -59,7 +59,7 @@ public class PlayerStats : MonoBehaviour
 
     private void SetHealth()
     {
-        healthBar.value = CalculateHealthPercentage();
+        healthBar.value = health / maxHealth;
         amountOfHealth.text = Mathf.Ceil(health).ToString() + " / " + Mathf.Ceil(maxHealth).ToString();
     }
 
@@ -77,13 +77,7 @@ public class PlayerStats : MonoBehaviour
         {
             health = 0;
             Destroy(player);
-            return;
         }
-    }
-
-    private float CalculateHealthPercentage()
-    {
-        return (health / maxHealth);
     }
 
     public void AddHealth(float value)

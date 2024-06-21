@@ -1,60 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Vector2 m_Position;
-    [SerializeField] private float movementDistance;
-    [SerializeField] private float speed;
-    private bool movingLeft;
-    private float leftEdge;
-    private float rightEdge;
-    public float damage;
+    public float moveSpeed = 3f; // Скорость движения врага
+    public float stoppingDistance = 1f; // Расстояние, на котором враг остановится
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private Transform player; // Ссылка на объект игрока
+    private Rigidbody2D rb;
+    private Vector2 movement;
+    private bool isPlayerInRange = false;
+
+    private void Start()
     {
-        if (collision.tag == "Player")
-        {
-            collision.GetComponent<PlayerStats>().DealDamage(damage);
-        }
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Awake()
+    private void Update()
     {
-        leftEdge = transform.position.x - movementDistance;
-        rightEdge = transform.position.x + movementDistance;
-    }
-
-    void Update()
-    {
-
-        if (movingLeft)
+        if (isPlayerInRange && player != null)
         {
-            if (transform.position.x > leftEdge)
-            {
-                transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
-            }
-            else
-                movingLeft = false;
+            // Определяем направление к игроку
+            movement = (player.position - transform.position).normalized;
         }
         else
         {
-            if (transform.position.x < rightEdge)
-            {
-                transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
-            }
-            else
-                movingLeft = true;
+            movement = Vector2.zero;
         }
+    }
 
-        //if (m_Position.x > 0 && movingLeft == true || m_Position.x < 0 && movingLeft == false)
-        //{
-        //    Vector3 theScale = transform.localScale;
-        //    theScale.x *= -1;
-        //    transform.localScale = theScale;
+    private void FixedUpdate()
+    {
+        if (isPlayerInRange && player != null && Vector2.Distance(transform.position, player.position) > stoppingDistance)
+        {
+            // Двигаем врага, если он дальше stoppingDistance
+            rb.MovePosition((Vector2)transform.position + (moveSpeed * Time.fixedDeltaTime * movement));
+        }
+    }
 
-        //    movingLeft = !movingLeft;
-        //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player = other.transform;
+            isPlayerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+        }
     }
 }

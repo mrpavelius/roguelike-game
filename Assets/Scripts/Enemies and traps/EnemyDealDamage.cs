@@ -20,7 +20,7 @@ public class EnemyDealDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && Vector2.Distance(transform.position, player.transform.position) >= 1)
         {
             collision.GetComponent<PlayerStats>().DealDamage(damage);
         }
@@ -38,7 +38,7 @@ public class EnemyDealDamage : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>().gameObject;
     }
 
-    IEnumerator shootPlayer()
+    private IEnumerator shootPlayer()
     {
         yield return new WaitForSeconds(cooldown);
         if (player != null)
