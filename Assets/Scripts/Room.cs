@@ -68,7 +68,6 @@ public class Room : MonoBehaviour
 
     private void SetDoorsState(bool open)
     {
-        Debug.Log($"Setting doors to {(open ? "open" : "closed")}");
         topDoor.SetActive(!open);
         bottomDoor.SetActive(!open);
         leftDoor.SetActive(!open);

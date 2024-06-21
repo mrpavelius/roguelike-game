@@ -20,7 +20,7 @@ public class PlayerDealDamage : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !GamePause.isGamePaused)
         {
             _audioSource.clip = _projectileSoundClip;
             _audioSource.Play();
